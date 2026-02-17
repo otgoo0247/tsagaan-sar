@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Цагаан сарын мэндчилгээ</title>
+  <style>
+    :root{
+      --bg1:#070614; --bg2:#0b0a1e;
+      --gold1:#f7d37a; --gold2:#b88a2a;
+      --card:#0f1026cc; --text:#f6f2e8;
+      --muted:#cbbda5; --accent:#ffdb8a;
+      --shadow: 0 24px 60px rgba(0,0,0,.55);
+      --radius: 18px;
+    }
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans";
+      color:var(--text);
+      background:
+        radial-gradient(1200px 800px at 20% 20%, #1a1340 0%, transparent 55%),
+        radial-gradient(900px 600px at 80% 30%, #2a1b38 0%, transparent 50%),
+        linear-gradient(160deg, var(--bg1), var(--bg2));
+      overflow-x:hidden;
+    }
+    .pattern{
+      position:fixed; inset:0; pointer-events:none;
+      opacity:.14;
+      background:
+        radial-gradient(circle at 20px 20px, rgba(255,219,138,.55) 2px, transparent 3px) 0 0 / 44px 44px,
+        radial-gradient(circle at 22px 22px, rgba(255,219,138,.25) 1px, transparent 2px) 0 0 / 44px 44px;
+      mix-blend-mode: screen;
+    }
+    .stars{ position:fixed; inset:0; pointer-events:none; opacity:.75; }
+    .star{
+      position:absolute; width:2px; height:2px; border-radius:50%;
+      background: rgba(255,255,255,.9);
+      animation: twinkle 3.5s infinite ease-in-out;
+    }
+    @keyframes twinkle{
+      0%,100%{ transform:scale(1); opacity:.5; }
+      50%{ transform:scale(1.8); opacity:1; }
+    }
+
+    .wrap{
+      min-height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding: 24px 14px;
+      position:relative;
+      z-index:2;
+    }
+    .card{
+      width:min(760px, 100%);
+      background: var(--card);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      border:1px solid rgba(255,219,138,.18);
+      position:relative;
+      overflow:hidden;
+    }
+    .card::before{
+      content:""; position:absolute; inset:-2px; z-index:0;
+      background: conic-gradient(from 180deg,
+        rgba(247,211,122,.05),
+        rgba(247,211,122,.35),
+        rgba(184,138,42,.15),
+        rgba(247,211,122,.35),
+        rgba(247,211,122,.05)
+      );
+      filter: blur(10px); opacity:.9;
+    }
+    .card::after{
+      content:""; position:absolute; inset:1px; z-index:0;
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border-radius: calc(var(--radius) - 2px);
+    }
+    .content{ position:relative; z-index:1; padding: 24px 18px 18px; }
+
+    .pill{
+      display:inline-flex; gap:10px; align-items:center;
+      padding:10px 14px; border-radius:999px;
+      background: rgba(255,219,138,.10);
+      border:1px solid rgba(255,219,138,.22);
+      color: var(--accent);
+      font-weight: 900;
+      letter-spacing:.2px;
+    }
+    h1{
+      margin: 16px 0 6px;
+      font-size: clamp(26px, 4.2vw, 42px);
+      line-height:1.05;
+    }
+    .sub{
+      margin:0 0 14px;
+      color: var(--muted);
+      line-height:1.55;
+      font-size: 14px;
+    }
+
+    .box{
+      border-radius: 14px;
+      border: 1px solid rgba(255,219,138,.14);
+      background: rgba(10,10,20,.35);
+      padding: 14px;
+    }
+
+    /* ✅ Embedded image frame */
+    .imgFrame{
+      border-radius: 14px;
+      border: 1px solid rgba(255,219,138,.18);
+      background: rgba(0,0,0,.18);
+      overflow: hidden;
+      margin: 12px 0;
+    }
+    .imgFrame img{
+      width: 100%;
+      max-height: 320px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .msg{
+      font-size: 15px;
+      line-height:1.6;
+      white-space: pre-wrap;
+      user-select:text;
+      margin:0;
+    }
+
+    .row{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+      margin-top: 12px;
+    }
+
+    input[type="text"]{
+      flex: 1 1 220px;
+      padding:11px 12px;
+      border-radius:12px;
+      border:1px solid rgba(255,219,138,.18);
+      background: rgba(0,0,0,.18);
+      color: var(--text);
+      outline:none;
+    }
+    input[type="text"]:focus{
+      border-color: rgba(255,219,138,.38);
+      box-shadow:0 0 0 4px rgba(255,219,138,.10);
+    }
+
+    .btns{ display:flex; gap:10px; flex-wrap:wrap; }
+    button{
+      border:none; cursor:pointer;
+      border-radius: 12px;
+      padding: 11px 14px;
+      font-weight: 900;
+      letter-spacing:.2px;
+      color:#221a07;
+      background: linear-gradient(180deg, var(--gold1), var(--gold2));
+      box-shadow: 0 10px 24px rgba(0,0,0,.35);
+      transition: transform .08s ease, filter .2s ease;
+    }
+    button:active{ transform: translateY(1px) scale(.99); }
+    button.secondary{
+      color: var(--text);
+      background: rgba(255,255,255,.08);
+      border:1px solid rgba(255,219,138,.16);
+      box-shadow:none;
+      font-weight:800;
+    }
+    button.secondary:hover{ filter: brightness(1.1); }
+
+    .tiny{
+      margin-top: 10px;
+      color: var(--muted);
+      font-size: 12px;
+      display:flex;
+      justify-content:space-between;
+      gap:10px;
+      flex-wrap:wrap;
+    }
+
+    .toast{
+      position: fixed;
+      left:50%;
+      bottom: 18px;
+      transform: translateX(-50%);
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(0,0,0,.55);
+      border: 1px solid rgba(255,219,138,.22);
+      color: var(--text);
+      backdrop-filter: blur(8px);
+      opacity:0;
+      pointer-events:none;
+      transition: opacity .25s ease, transform .25s ease;
+      z-index: 50;
+      font-size: 13px;
+    }
+    .toast.show{
+      opacity:1;
+      transform: translateX(-50%) translateY(-6px);
+    }
+  </style>
+</head>
+<body>
+  <div class="pattern"></div>
+  <div class="stars" id="stars"></div>
+
+  <div class="wrap">
+    <div class="card">
+      <div class="content">
+        <div class="pill" id="pill">Цагаан сар — мэндчилгээ</div>
+        <h1 id="title">Сар шинэдээ сайхан шинэлээрэй 🤍✨</h1>
+        <p class="sub">Зураг нь кодонд “файл замаар” орсон. Share/WhatsApp/Copy-оор текстээ явуулна.</p>
+
+        <div class="box">
+          <!-- ✅ Зураг шууд кодонд (upload байхгүй) -->
+          <div class="imgFrame" id="imgFrame" style="display:none;">
+            <img id="heroImg" alt="Мэндчилгээний зураг">
+          </div>
+
+          <p class="msg" id="msg"></p>
+
+          <div class="row">
+            <input id="name" type="text" placeholder="(Заавал биш) Нэр: Жишээ нь “Ээж”" />
+            <div class="btns">
+              <button id="shareBtn" type="button">Share</button>
+              <button id="waBtn" class="secondary" type="button">WhatsApp</button>
+              <button id="copyBtn" class="secondary" type="button">Copy</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="tiny">
+          <span id="modeInfo"></span>
+          <span id="dateInfo"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">OK ✅</div>
+
+  <script>
+    /*********************************************************
+     * 1) Шинийн 1 - Gregorian огноо (хүсвэл солино)
+     *********************************************************/
+    const TSAGAAN_SAR_SHINII_1 = "2026-02-17"; // YYYY-MM-DD
+
+    /*********************************************************
+     * 2) ✅ Зурагны файлын зам (ЭНДЭЭС Л СОЛИНО)
+     *    Жишээ: "img/photo.jpg" эсвэл "img/photo.png"
+     *********************************************************/
+    const IMAGE_SRC = "img/Hamt_Olon.jpg";  // <-- Зургаа энэ замаар байрлуул!
+
+    const $ = (id)=>document.getElementById(id);
+    const toast = $("toast");
+
+    function showToast(t){
+      toast.textContent = t;
+      toast.classList.add("show");
+      clearTimeout(showToast._t);
+      showToast._t = setTimeout(()=>toast.classList.remove("show"), 1500);
+    }
+    function pad(n){ return String(n).padStart(2,"0"); }
+    function parseYMD(ymd){
+      const [y,m,d] = ymd.split("-").map(Number);
+      return new Date(y, m-1, d, 12, 0, 0);
+    }
+    function formatDate(d){
+      return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
+    }
+    function addDays(date, days){
+      const d = new Date(date);
+      d.setDate(d.getDate() + days);
+      return d;
+    }
+
+    // stars
+    const stars = $("stars");
+    function makeStars(n=85){
+      stars.innerHTML = "";
+      const w = innerWidth, h = innerHeight;
+      for(let i=0;i<n;i++){
+        const s = document.createElement("div");
+        s.className = "star";
+        s.style.left = (Math.random()*w) + "px";
+        s.style.top  = (Math.random()*h) + "px";
+        s.style.animationDelay = (Math.random()*3.5) + "s";
+        s.style.opacity = (0.25 + Math.random()*0.75).toFixed(2);
+        s.style.transform = `scale(${(0.7 + Math.random()*1.6).toFixed(2)})`;
+        stars.appendChild(s);
+      }
+    }
+    makeStars();
+    addEventListener("resize", ()=>makeStars());
+
+    // mode
+    const shinii1 = parseYMD(TSAGAAN_SAR_SHINII_1);
+    const bituun = addDays(shinii1, -1);
+    const now = new Date();
+    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12, 0, 0);
+
+    const isBituun = formatDate(today) === formatDate(bituun);
+    const isShinii1 = formatDate(today) === formatDate(shinii1);
+
+    const pill = $("pill");
+    const title = $("title");
+    const msgEl = $("msg");
+    const modeInfo = $("modeInfo");
+    const dateInfo = $("dateInfo");
+    const nameInput = $("name");
+
+    const bituunMsg =
+`Битүүний орой “Бүтэн мэнд” хүргэе! 🌙✨
+Хуучин оноо үдэж, шинэ оноо угтах гэж буй энэ сайхан өдөр
+эрүүл энх, элбэг дэлбэг, амар амгалан бүхнийг хүсье.
+Сар шинэдээ сайхан шинэлээрэй! 🤍`;
+
+    const shiniiMsg =
+`Сар шинэдээ сайхан шинэлээрэй! 🤍✨
+Шинэ ондоо эрүүл энх, амжилт бүтээл, аз жаргал дүүрэн байхыг хүсье.
+Амар амгалан байг!`;
+
+    function buildMessage(){
+      const n = nameInput.value.trim();
+      const base = isBituun ? bituunMsg : shiniiMsg;
+      if(!n) return base;
+      return `${n} аа,\n${base}`;
+    }
+
+    function applyUI(){
+      if(isBituun){
+        pill.textContent = "Битүүний өдөр — “Бүтэн мэнд”";
+        title.textContent = "Бүтэн мэнд хүргэе 🌙✨";
+        modeInfo.textContent = "Горим: Битүүн";
+      } else if(isShinii1){
+        pill.textContent = "Шинийн 1 — мэндчилгээ";
+        title.textContent = "Сар шинэдээ сайхан шинэлээрэй 🤍✨";
+        modeInfo.textContent = "Горим: Шинийн 1";
+      } else {
+        pill.textContent = "Цагаан сар — мэндчилгээ";
+        title.textContent = "Сар шинэдээ сайхан шинэлээрэй 🤍✨";
+        modeInfo.textContent = "Горим: Ердийн";
+      }
+      dateInfo.textContent = `Өнөөдөр: ${formatDate(today)}`;
+      msgEl.textContent = buildMessage();
+    }
+    nameInput.addEventListener("input", applyUI);
+    applyUI();
+
+    // actions
+    async function copyText(text){
+      try{
+        await navigator.clipboard.writeText(text);
+        showToast("Хууллаа ✅");
+      }catch{
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        ta.remove();
+        showToast("Хууллаа ✅");
+      }
+    }
+
+    $("copyBtn").addEventListener("click", ()=>copyText(buildMessage()));
+    $("waBtn").addEventListener("click", ()=>{
+      const text = encodeURIComponent(buildMessage());
+      window.open(`https://wa.me/?text=${text}`, "_blank", "noopener,noreferrer");
+    });
+    $("shareBtn").addEventListener("click", async ()=>{
+      const text = buildMessage();
+      try{
+        if(navigator.share){
+          await navigator.share({ title: title.textContent, text });
+          showToast("Share ✅");
+        } else {
+          await copyText(text);
+        }
+      } catch {
+        showToast("Цуцлагдсан");
+      }
+    });
+
+    /*********************************************************
+     * ✅ Image: load from file path (no upload)
+     *********************************************************/
+    (function loadImage(){
+      const img = $("heroImg");
+      const frame = $("imgFrame");
+
+      img.onload = () => { frame.style.display = "block"; };
+      img.onerror = () => {
+        frame.style.display = "none";
+        // Хэрвээ зураг олдохгүй бол toast гаргаж болно:
+        // showToast("Зураг олдсонгүй (IMAGE_SRC шалга)");
+        console.warn("Image not found:", IMAGE_SRC);
+      };
+
+      img.src = IMAGE_SRC;
+    })();
+  </script>
+</body>
+</html>
