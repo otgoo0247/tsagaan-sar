@@ -33,34 +33,19 @@
         radial-gradient(circle at 22px 22px, rgba(255,219,138,.25) 1px, transparent 2px) 0 0 / 44px 44px;
       mix-blend-mode: screen;
     }
-    .stars{ position:fixed; inset:0; pointer-events:none; opacity:.75; }
-    .star{
-      position:absolute; width:2px; height:2px; border-radius:50%;
-      background: rgba(255,255,255,.9);
-      animation: twinkle 3.5s infinite ease-in-out;
-    }
-    @keyframes twinkle{
-      0%,100%{ transform:scale(1); opacity:.5; }
-      50%{ transform:scale(1.8); opacity:1; }
-    }
-
     .wrap{
       min-height:100%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
+      display:flex; align-items:center; justify-content:center;
       padding: 24px 14px;
-      position:relative;
-      z-index:2;
+      position:relative; z-index:2;
     }
     .card{
-      width:min(760px, 100%);
+      width:min(820px, 100%);
       background: var(--card);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
       border:1px solid rgba(255,219,138,.18);
-      position:relative;
-      overflow:hidden;
+      position:relative; overflow:hidden;
     }
     .card::before{
       content:""; position:absolute; inset:-2px; z-index:0;
@@ -78,7 +63,7 @@
       background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
       border-radius: calc(var(--radius) - 2px);
     }
-    .content{ position:relative; z-index:1; padding: 24px 18px 18px; }
+    .content{ position:relative; z-index:1; padding: 22px 18px 18px; }
 
     .pill{
       display:inline-flex; gap:10px; align-items:center;
@@ -90,16 +75,11 @@
       letter-spacing:.2px;
     }
     h1{
-      margin: 16px 0 6px;
-      font-size: clamp(26px, 4.2vw, 42px);
+      margin: 14px 0 8px;
+      font-size: clamp(24px, 4.0vw, 40px);
       line-height:1.05;
     }
-    .sub{
-      margin:0 0 14px;
-      color: var(--muted);
-      line-height:1.55;
-      font-size: 14px;
-    }
+    .sub{ margin:0 0 14px; color: var(--muted); line-height:1.55; font-size: 14px; }
 
     .box{
       border-radius: 14px;
@@ -108,7 +88,28 @@
       padding: 14px;
     }
 
-    /* ✅ Embedded image frame */
+    /* login form */
+    .form{
+      display:grid;
+      gap:10px;
+      max-width: 520px;
+    }
+    label{ font-size: 12px; color: var(--muted); }
+    input{
+      width:100%;
+      padding:11px 12px;
+      border-radius:12px;
+      border:1px solid rgba(255,219,138,.18);
+      background: rgba(0,0,0,.18);
+      color: var(--text);
+      outline:none;
+    }
+    input:focus{
+      border-color: rgba(255,219,138,.38);
+      box-shadow:0 0 0 4px rgba(255,219,138,.10);
+    }
+
+    /* image */
     .imgFrame{
       border-radius: 14px;
       border: 1px solid rgba(255,219,138,.18);
@@ -117,10 +118,10 @@
       margin: 12px 0;
     }
     .imgFrame img{
-      width: 100%;
-      max-height: 320px;
+      width:100%;
+      max-height: 360px;
       object-fit: cover;
-      display: block;
+      display:block;
     }
 
     .msg{
@@ -132,26 +133,9 @@
     }
 
     .row{
-      display:flex;
-      gap:10px;
-      flex-wrap:wrap;
-      align-items:center;
-      justify-content:space-between;
+      display:flex; gap:10px; flex-wrap:wrap;
+      align-items:center; justify-content:space-between;
       margin-top: 12px;
-    }
-
-    input[type="text"]{
-      flex: 1 1 220px;
-      padding:11px 12px;
-      border-radius:12px;
-      border:1px solid rgba(255,219,138,.18);
-      background: rgba(0,0,0,.18);
-      color: var(--text);
-      outline:none;
-    }
-    input[type="text"]:focus{
-      border-color: rgba(255,219,138,.38);
-      box-shadow:0 0 0 4px rgba(255,219,138,.10);
     }
 
     .btns{ display:flex; gap:10px; flex-wrap:wrap; }
@@ -174,17 +158,8 @@
       box-shadow:none;
       font-weight:800;
     }
-    button.secondary:hover{ filter: brightness(1.1); }
 
-    .tiny{
-      margin-top: 10px;
-      color: var(--muted);
-      font-size: 12px;
-      display:flex;
-      justify-content:space-between;
-      gap:10px;
-      flex-wrap:wrap;
-    }
+    .tiny{ margin-top: 10px; color: var(--muted); font-size: 12px; display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; }
 
     .toast{
       position: fixed;
@@ -203,45 +178,81 @@
       z-index: 50;
       font-size: 13px;
     }
-    .toast.show{
-      opacity:1;
-      transform: translateX(-50%) translateY(-6px);
-    }
+    .toast.show{ opacity:1; transform: translateX(-50%) translateY(-6px); }
+
+    .hide{ display:none !important; }
+    .error{ color: #ffd1d1; font-size: 13px; }
   </style>
 </head>
 <body>
   <div class="pattern"></div>
-  <div class="stars" id="stars"></div>
 
   <div class="wrap">
     <div class="card">
       <div class="content">
-        <div class="pill" id="pill">Цагаан сар — мэндчилгээ</div>
-        <h1 id="title">Сар шинэдээ сайхан шинэлээрэй 🤍✨</h1>
-        <p class="sub">Зураг нь кодонд “файл замаар” орсон. Share/WhatsApp/Copy-оор текстээ явуулна.</p>
+        <div class="pill">Цагаан сар — нэвтрэх</div>
 
-        <div class="box">
-          <!-- ✅ Зураг шууд кодонд (upload байхгүй) -->
-          <div class="imgFrame" id="imgFrame" style="display:none;">
-            <img id="heroImg" alt="Мэндчилгээний зураг">
-          </div>
+        <!-- ✅ LOGIN SCREEN -->
+        <section id="loginScreen">
+          <h1>Нэрээ оруулаад нэвтэрнэ үү</h1>
+          <p class="sub">Нэр + нууц үг зөв бол мэндчилгээ гарна.</p>
 
-          <p class="msg" id="msg"></p>
+          <div class="box">
+            <div class="form">
+              <div>
+                <label for="loginName">Нэр</label>
+                <input id="loginName" type="text" placeholder="Жишээ: Ээж" autocomplete="name">
+              </div>
+              <div>
+                <label for="loginPass">Нууц үг</label>
+                <input id="loginPass" type="password" placeholder="Нууц үг" autocomplete="current-password">
+              </div>
 
-          <div class="row">
-            <input id="name" type="text" placeholder="(Заавал биш) Нэр: Жишээ нь “Ээж”" />
-            <div class="btns">
-              <button id="shareBtn" type="button">Share</button>
-              <button id="waBtn" class="secondary" type="button">WhatsApp</button>
-              <button id="copyBtn" class="secondary" type="button">Copy</button>
+              <div class="row">
+                <div class="btns">
+                  <button id="loginBtn" type="button">Нэвтрэх</button>
+                  <button id="clearBtn" class="secondary" type="button">Цэвэрлэх</button>
+                </div>
+                <span class="error" id="loginError"></span>
+              </div>
+
+              <p class="sub" style="margin:0">
+                ⚠️ Энэ нь статик сайт тул жинхэнэ хамгаалалт биш (source-оор харах боломжтой).
+              </p>
             </div>
           </div>
-        </div>
+        </section>
 
-        <div class="tiny">
-          <span id="modeInfo"></span>
-          <span id="dateInfo"></span>
-        </div>
+        <!-- ✅ GREETING SCREEN -->
+        <section id="greetScreen" class="hide">
+          <div class="pill" id="modePill">Цагаан сар — мэндчилгээ</div>
+          <h1 id="title">Сар шинэдээ сайхан шинэлээрэй 🤍✨</h1>
+          <p class="sub" id="sub">Таны нэрээр зураг сонгогдсон мэндчилгээ.</p>
+
+          <div class="box">
+            <div class="imgFrame">
+              <img id="heroImg" alt="Мэндчилгээний зураг">
+            </div>
+
+            <p class="msg" id="msg"></p>
+
+            <div class="row">
+              <div class="btns">
+                <button id="shareBtn" type="button">Share</button>
+                <button id="waBtn" class="secondary" type="button">WhatsApp</button>
+                <button id="copyBtn" class="secondary" type="button">Copy</button>
+                <button id="logoutBtn" class="secondary" type="button">Гарах</button>
+              </div>
+              <span class="sub" style="margin:0" id="who"></span>
+            </div>
+          </div>
+
+          <div class="tiny">
+            <span id="modeInfo"></span>
+            <span id="dateInfo"></span>
+          </div>
+        </section>
+
       </div>
     </div>
   </div>
@@ -250,16 +261,35 @@
 
   <script>
     /*********************************************************
-     * 1) Шинийн 1 - Gregorian огноо (хүсвэл солино)
+     * 1) ТОХИРУУЛГА
      *********************************************************/
+    // Шинийн 1 - Gregorian огноо
     const TSAGAAN_SAR_SHINII_1 = "2026-02-17"; // YYYY-MM-DD
 
-    /*********************************************************
-     * 2) ✅ Зурагны файлын зам (ЭНДЭЭС Л СОЛИНО)
-     *    Жишээ: "img/photo.jpg" эсвэл "img/photo.png"
-     *********************************************************/
-    const IMAGE_SRC = "Hamt_Olon.jpg";  // <-- Зургаа энэ замаар байрлуул!
+    // ✅ НУУЦ ҮГ (ЭНД СОЛИНО)
+    const PASSWORD = "1234"; // <-- өөрийн нууц үг
 
+    /*********************************************************
+     * 2) НЭРЭЭС ХАМААРАХ ЗУРГИЙН МАП
+     * - Түлхүүр: нэр (жишээ нь "Ээж", "Аав")
+     * - Утга: зурагны зам (img/...)
+     *
+     * Та өөрийнхөө “танайхны” нэрээр зургаа нэмээд явна.
+     *********************************************************/
+    const IMAGE_BY_NAME = {
+      "Ээж": "Hamt_Olon.jpg",
+      "Аав": "Hamt_Olon.jpg",
+      "Ах":  "Hamt_Olon.jpg",
+      "Эгч": "Hamt_Olon.jpg",
+      "Найз": "Hamt_Olon.jpg"
+    };
+
+    // Хэрвээ нэр нь таарахгүй бол энэ зураг гарна
+    const DEFAULT_IMAGE = "img/default.jpg";
+
+    /*********************************************************
+     * Helpers
+     *********************************************************/
     const $ = (id)=>document.getElementById(id);
     const toast = $("toast");
 
@@ -282,27 +312,13 @@
       d.setDate(d.getDate() + days);
       return d;
     }
-
-    // stars
-    const stars = $("stars");
-    function makeStars(n=85){
-      stars.innerHTML = "";
-      const w = innerWidth, h = innerHeight;
-      for(let i=0;i<n;i++){
-        const s = document.createElement("div");
-        s.className = "star";
-        s.style.left = (Math.random()*w) + "px";
-        s.style.top  = (Math.random()*h) + "px";
-        s.style.animationDelay = (Math.random()*3.5) + "s";
-        s.style.opacity = (0.25 + Math.random()*0.75).toFixed(2);
-        s.style.transform = `scale(${(0.7 + Math.random()*1.6).toFixed(2)})`;
-        stars.appendChild(s);
-      }
+    function normName(s){
+      return (s || "").trim();
     }
-    makeStars();
-    addEventListener("resize", ()=>makeStars());
 
-    // mode
+    /*********************************************************
+     * Mode (Битүүн / Шинийн 1 / Ердийн)
+     *********************************************************/
     const shinii1 = parseYMD(TSAGAAN_SAR_SHINII_1);
     const bituun = addDays(shinii1, -1);
     const now = new Date();
@@ -310,13 +326,6 @@
 
     const isBituun = formatDate(today) === formatDate(bituun);
     const isShinii1 = formatDate(today) === formatDate(shinii1);
-
-    const pill = $("pill");
-    const title = $("title");
-    const msgEl = $("msg");
-    const modeInfo = $("modeInfo");
-    const dateInfo = $("dateInfo");
-    const nameInput = $("name");
 
     const bituunMsg =
 `Битүүний орой “Бүтэн мэнд” хүргэе! 🌙✨
@@ -329,34 +338,112 @@
 Шинэ ондоо эрүүл энх, амжилт бүтээл, аз жаргал дүүрэн байхыг хүсье.
 Амар амгалан байг!`;
 
-    function buildMessage(){
-      const n = nameInput.value.trim();
+    function buildMessage(name){
       const base = isBituun ? bituunMsg : shiniiMsg;
-      if(!n) return base;
-      return `${n} аа,\n${base}`;
+      if(!name) return base;
+      return `${name} аа,\n${base}`;
     }
 
-    function applyUI(){
-      if(isBituun){
-        pill.textContent = "Битүүний өдөр — “Бүтэн мэнд”";
-        title.textContent = "Бүтэн мэнд хүргэе 🌙✨";
-        modeInfo.textContent = "Горим: Битүүн";
-      } else if(isShinii1){
-        pill.textContent = "Шинийн 1 — мэндчилгээ";
-        title.textContent = "Сар шинэдээ сайхан шинэлээрэй 🤍✨";
-        modeInfo.textContent = "Горим: Шинийн 1";
-      } else {
-        pill.textContent = "Цагаан сар — мэндчилгээ";
-        title.textContent = "Сар шинэдээ сайхан шинэлээрэй 🤍✨";
-        modeInfo.textContent = "Горим: Ердийн";
+    function modeTitle(){
+      if(isBituun) return { pill:"Битүүний өдөр — “Бүтэн мэнд”", title:"Бүтэн мэнд хүргэе 🌙✨", mode:"Битүүн" };
+      if(isShinii1) return { pill:"Шинийн 1 — мэндчилгээ", title:"Сар шинэдээ сайхан шинэлээрэй 🤍✨", mode:"Шинийн 1" };
+      return { pill:"Цагаан сар — мэндчилгээ", title:"Сар шинэдээ сайхан шинэлээрэй 🤍✨", mode:"Ердийн" };
+    }
+
+    /*********************************************************
+     * ✅ Login logic (simple)
+     *********************************************************/
+    const loginScreen = $("loginScreen");
+    const greetScreen = $("greetScreen");
+    const loginName = $("loginName");
+    const loginPass = $("loginPass");
+    const loginBtn = $("loginBtn");
+    const clearBtn = $("clearBtn");
+    const loginError = $("loginError");
+
+    const heroImg = $("heroImg");
+    const msgEl = $("msg");
+    const titleEl = $("title");
+    const modePill = $("modePill");
+    const modeInfo = $("modeInfo");
+    const dateInfo = $("dateInfo");
+    const who = $("who");
+
+    // remember only the name (not password)
+    const NAME_KEY = "tsagaan_sar_login_name_v1";
+    const savedName = localStorage.getItem(NAME_KEY);
+    if(savedName) loginName.value = savedName;
+
+    function pickImageByName(name){
+      // яг таг таарах нэр бол тэр зураг
+      if(IMAGE_BY_NAME[name]) return IMAGE_BY_NAME[name];
+
+      // жижиг/том үсгээс болж алдвал гэж: closest match (case-insensitive)
+      const lower = name.toLowerCase();
+      for(const k of Object.keys(IMAGE_BY_NAME)){
+        if(k.toLowerCase() === lower) return IMAGE_BY_NAME[k];
       }
-      dateInfo.textContent = `Өнөөдөр: ${formatDate(today)}`;
-      msgEl.textContent = buildMessage();
+      return DEFAULT_IMAGE;
     }
-    nameInput.addEventListener("input", applyUI);
-    applyUI();
 
-    // actions
+    function enterGreeting(name){
+      const mt = modeTitle();
+      modePill.textContent = mt.pill;
+      titleEl.textContent = mt.title;
+      modeInfo.textContent = `Горим: ${mt.mode}`;
+      dateInfo.textContent = `Өнөөдөр: ${formatDate(today)}`;
+
+      who.textContent = `Нэр: ${name}`;
+      msgEl.textContent = buildMessage(name);
+
+      const imgSrc = pickImageByName(name);
+      heroImg.onerror = () => { heroImg.src = DEFAULT_IMAGE; };
+      heroImg.src = imgSrc;
+
+      loginScreen.classList.add("hide");
+      greetScreen.classList.remove("hide");
+      showToast("Нэвтэрлээ ✅");
+    }
+
+    function doLogin(){
+      loginError.textContent = "";
+      const name = normName(loginName.value);
+      const pass = loginPass.value;
+
+      if(!name){
+        loginError.textContent = "Нэрээ оруулна уу.";
+        return;
+      }
+      if(pass !== PASSWORD){
+        loginError.textContent = "Нууц үг буруу байна.";
+        return;
+      }
+
+      localStorage.setItem(NAME_KEY, name);
+      enterGreeting(name);
+    }
+
+    loginBtn.addEventListener("click", doLogin);
+    loginPass.addEventListener("keydown", (e)=>{ if(e.key === "Enter") doLogin(); });
+    clearBtn.addEventListener("click", ()=>{
+      loginName.value = "";
+      loginPass.value = "";
+      loginError.textContent = "";
+      localStorage.removeItem(NAME_KEY);
+      showToast("Цэвэрлэв");
+    });
+
+    $("logoutBtn").addEventListener("click", ()=>{
+      // go back to login
+      greetScreen.classList.add("hide");
+      loginScreen.classList.remove("hide");
+      loginPass.value = "";
+      showToast("Гарлаа");
+    });
+
+    /*********************************************************
+     * Share / WhatsApp / Copy
+     *********************************************************/
     async function copyText(text){
       try{
         await navigator.clipboard.writeText(text);
@@ -371,17 +458,21 @@
         showToast("Хууллаа ✅");
       }
     }
-
-    $("copyBtn").addEventListener("click", ()=>copyText(buildMessage()));
+    $("copyBtn").addEventListener("click", ()=>{
+      const name = localStorage.getItem(NAME_KEY) || "";
+      copyText(buildMessage(name));
+    });
     $("waBtn").addEventListener("click", ()=>{
-      const text = encodeURIComponent(buildMessage());
+      const name = localStorage.getItem(NAME_KEY) || "";
+      const text = encodeURIComponent(buildMessage(name));
       window.open(`https://wa.me/?text=${text}`, "_blank", "noopener,noreferrer");
     });
     $("shareBtn").addEventListener("click", async ()=>{
-      const text = buildMessage();
+      const name = localStorage.getItem(NAME_KEY) || "";
+      const text = buildMessage(name);
       try{
         if(navigator.share){
-          await navigator.share({ title: title.textContent, text });
+          await navigator.share({ title: titleEl.textContent, text });
           showToast("Share ✅");
         } else {
           await copyText(text);
@@ -391,24 +482,8 @@
       }
     });
 
-    /*********************************************************
-     * ✅ Image: load from file path (no upload)
-     *********************************************************/
-    (function loadImage(){
-      const img = $("heroImg");
-      const frame = $("imgFrame");
-
-      img.onload = () => { frame.style.display = "block"; };
-      img.onerror = () => {
-        frame.style.display = "none";
-        // Хэрвээ зураг олдохгүй бол toast гаргаж болно:
-        // showToast("Зураг олдсонгүй (IMAGE_SRC шалга)");
-        console.warn("Image not found:", IMAGE_SRC);
-      };
-
-      img.src = IMAGE_SRC;
-    })();
+    // Optional: auto-enter if user already typed name before (but still require password)
+    // No auto login for safety.
   </script>
 </body>
 </html>
-
