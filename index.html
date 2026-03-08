@@ -2,495 +2,958 @@
 <html lang="mn">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Цагаан сарын мэндчилгээ</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Мартын 8</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@500;700;900&family=Dancing+Script:wght@700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
   <style>
-    :root{
-      --bg1:#070614; --bg2:#0b0a1e;
-      --gold1:#f7d37a; --gold2:#b88a2a;
-      --card:#0f1026cc; --text:#f6f2e8;
-      --muted:#cbbda5; --accent:#ffdb8a;
-      --shadow: 0 24px 60px rgba(0,0,0,.55);
-      --radius: 18px;
-    }
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
-    body{
-      margin:0;
-      font-family: system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans";
-      color:var(--text);
-      background:
-        radial-gradient(1200px 800px at 20% 20%, #1a1340 0%, transparent 55%),
-        radial-gradient(900px 600px at 80% 30%, #2a1b38 0%, transparent 50%),
-        linear-gradient(160deg, var(--bg1), var(--bg2));
-      overflow-x:hidden;
-    }
-    .pattern{
-      position:fixed; inset:0; pointer-events:none;
-      opacity:.14;
-      background:
-        radial-gradient(circle at 20px 20px, rgba(255,219,138,.55) 2px, transparent 3px) 0 0 / 44px 44px,
-        radial-gradient(circle at 22px 22px, rgba(255,219,138,.25) 1px, transparent 2px) 0 0 / 44px 44px;
-      mix-blend-mode: screen;
-    }
-    .wrap{
-      min-height:100%;
-      display:flex; align-items:center; justify-content:center;
-      padding: 24px 14px;
-      position:relative; z-index:2;
-    }
-    .card{
-      width:min(820px, 100%);
-      background: var(--card);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      border:1px solid rgba(255,219,138,.18);
-      position:relative; overflow:hidden;
-    }
-    .card::before{
-      content:""; position:absolute; inset:-2px; z-index:0;
-      background: conic-gradient(from 180deg,
-        rgba(247,211,122,.05),
-        rgba(247,211,122,.35),
-        rgba(184,138,42,.15),
-        rgba(247,211,122,.35),
-        rgba(247,211,122,.05)
-      );
-      filter: blur(10px); opacity:.9;
-    }
-    .card::after{
-      content:""; position:absolute; inset:1px; z-index:0;
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      border-radius: calc(var(--radius) - 2px);
-    }
-    .content{ position:relative; z-index:1; padding: 22px 18px 18px; }
-
-    .pill{
-      display:inline-flex; gap:10px; align-items:center;
-      padding:10px 14px; border-radius:999px;
-      background: rgba(255,219,138,.10);
-      border:1px solid rgba(255,219,138,.22);
-      color: var(--accent);
-      font-weight: 900;
-      letter-spacing:.2px;
-    }
-    h1{
-      margin: 14px 0 8px;
-      font-size: clamp(24px, 4.0vw, 40px);
-      line-height:1.05;
-    }
-    .sub{ margin:0 0 14px; color: var(--muted); line-height:1.55; font-size: 14px; }
-
-    .box{
-      border-radius: 14px;
-      border: 1px solid rgba(255,219,138,.14);
-      background: rgba(10,10,20,.35);
-      padding: 14px;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    /* login form */
-    .form{
-      display:grid;
-      gap:10px;
-      max-width: 520px;
-    }
-    label{ font-size: 12px; color: var(--muted); }
-    input{
-      width:100%;
-      padding:11px 12px;
-      border-radius:12px;
-      border:1px solid rgba(255,219,138,.18);
-      background: rgba(0,0,0,.18);
-      color: var(--text);
-      outline:none;
-    }
-    input:focus{
-      border-color: rgba(255,219,138,.38);
-      box-shadow:0 0 0 4px rgba(255,219,138,.10);
+    html {
+      scroll-behavior: smooth;
     }
 
-    /* image */
-    .imgFrame{
-      border-radius: 14px;
-      border: 1px solid rgba(255,219,138,.18);
-      background: rgba(0,0,0,.18);
+    body {
+      background: #050505;
+      font-family: 'Poppins', sans-serif;
+      min-height: 100vh;
+      width: 100%;
+      color: #fff;
+      overflow-x: hidden;
+    }
+
+    /* LOGIN */
+    #loginPage {
       overflow: hidden;
-      margin: 12px 0;
-    }
-    .imgFrame img{
-      width:100%;
-      max-height: 360px;
-      object-fit: cover;
-      display:block;
+      min-height: 100vh;
+      position: relative;
+      background: url("bg.jpg") no-repeat center center/cover;
     }
 
-    .msg{
-      font-size: 15px;
-      line-height:1.6;
-      white-space: pre-wrap;
-      user-select:text;
-      margin:0;
+    .scene {
+      position: relative;
+      width: 100%;
+      height: 100vh;
+      overflow: hidden;
     }
 
-    .row{
-      display:flex; gap:10px; flex-wrap:wrap;
-      align-items:center; justify-content:space-between;
-      margin-top: 12px;
+    .trees-top {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1;
+      pointer-events: none;
     }
 
-    .btns{ display:flex; gap:10px; flex-wrap:wrap; }
-    button{
-      border:none; cursor:pointer;
-      border-radius: 12px;
-      padding: 11px 14px;
-      font-weight: 900;
-      letter-spacing:.2px;
-      color:#221a07;
-      background: linear-gradient(180deg, var(--gold1), var(--gold2));
-      box-shadow: 0 10px 24px rgba(0,0,0,.35);
-      transition: transform .08s ease, filter .2s ease;
-    }
-    button:active{ transform: translateY(1px) scale(.99); }
-    button.secondary{
-      color: var(--text);
-      background: rgba(255,255,255,.08);
-      border:1px solid rgba(255,219,138,.16);
-      box-shadow:none;
-      font-weight:800;
-    }
-
-    .tiny{ margin-top: 10px; color: var(--muted); font-size: 12px; display:flex; justify-content:space-between; gap:10px; flex-wrap:wrap; }
-
-    .toast{
-      position: fixed;
-      left:50%;
-      bottom: 18px;
+    .girl-bike {
+      position: absolute;
+      bottom: 110px;
+      left: 50%;
       transform: translateX(-50%);
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: rgba(0,0,0,.55);
-      border: 1px solid rgba(255,219,138,.22);
-      color: var(--text);
-      backdrop-filter: blur(8px);
-      opacity:0;
-      pointer-events:none;
-      transition: opacity .25s ease, transform .25s ease;
-      z-index: 50;
-      font-size: 13px;
+      width: 280px;
+      z-index: 4;
+      animation: floatBike 3s ease-in-out infinite;
     }
-    .toast.show{ opacity:1; transform: translateX(-50%) translateY(-6px); }
 
-    .hide{ display:none !important; }
-    .error{ color: #ffd1d1; font-size: 13px; }
+    .login-box {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 350px;
+      background: rgba(255, 255, 255, 0.15);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-radius: 20px;
+      padding: 30px 25px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      z-index: 10;
+      text-align: center;
+    }
+
+    .login-box h2 {
+      color: #fff;
+      margin-bottom: 20px;
+      font-size: 28px;
+      text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .login-box input {
+      width: 100%;
+      padding: 14px 16px;
+      margin-bottom: 15px;
+      border: none;
+      border-radius: 12px;
+      outline: none;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 12px;
+      background: #ff6b35;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .login-box button:hover {
+      background: #e85a24;
+      transform: scale(1.02);
+    }
+
+    .leaf {
+      position: absolute;
+      top: -60px;
+      width: 32px;
+      z-index: 3;
+      opacity: 0.95;
+      animation-name: fallLeaf;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    .leaf1 { left: 8%;  animation-duration: 11s; animation-delay: 0s; }
+    .leaf2 { left: 22%; animation-duration: 9s;  animation-delay: 2s; }
+    .leaf3 { left: 38%; animation-duration: 12s; animation-delay: 1s; }
+    .leaf4 { left: 56%; animation-duration: 10s; animation-delay: 3s; }
+    .leaf5 { left: 73%; animation-duration: 13s; animation-delay: 1.5s; }
+    .leaf6 { left: 88%; animation-duration: 9.5s; animation-delay: 0.5s; }
+
+    @keyframes fallLeaf {
+      0% { transform: translateY(-80px) rotate(0deg); }
+      25% { transform: translateY(25vh) translateX(20px) rotate(90deg); }
+      50% { transform: translateY(50vh) translateX(-20px) rotate(180deg); }
+      75% { transform: translateY(75vh) translateX(25px) rotate(270deg); }
+      100% { transform: translateY(110vh) translateX(-10px) rotate(360deg); }
+    }
+
+    @keyframes floatBike {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(-8px); }
+    }
+
+    /* AFTER LOGIN */
+    #galleryPage {
+      display: none;
+      width: 100%;
+      min-height: 100vh;
+      background: #050505;
+    }
+
+    .hero-wrap {
+      position: relative;
+      min-height: 100vh;
+      overflow: hidden;
+      background: #0f0205;
+    }
+
+    #heartCanvas {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      width: 100%;
+      height: 100%;
+      display: block;
+      pointer-events: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 10;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      text-align: center;
+      transition: opacity 0.8s ease;
+    }
+
+    .hero-content.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .hero-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: 4rem;
+      text-shadow: 0 0 20px #ff2e63;
+      background: linear-gradient(to right, #fff, #ff2e63);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: floatTitle 3s ease-in-out infinite;
+      margin-bottom: 10px;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      opacity: 0.85;
+      text-shadow: 0 0 10px rgba(255, 46, 99, 0.5);
+      margin-bottom: 28px;
+    }
+
+    .action-btn, .logout-btn, .top-btn {
+      padding: 12px 24px;
+      border: none;
+      border-radius: 999px;
+      cursor: pointer;
+      text-decoration: none;
+      font-size: 15px;
+      font-weight: 700;
+      color: white;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(6px);
+      transition: 0.25s;
+    }
+
+    .action-btn:hover, .logout-btn:hover, .top-btn:hover {
+      transform: translateY(-2px) scale(1.03);
+    }
+
+    .action-btn.primary {
+      background: #ff2e63;
+      border-color: transparent;
+      box-shadow: 0 0 20px rgba(255,46,99,0.35);
+    }
+
+    .hero-actions {
+      margin-top: 18px;
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .success-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 15;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 1s ease;
+      text-align: center;
+      padding: 20px;
+      background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.65) 100%);
+    }
+
+    .success-overlay.show {
+      opacity: 1;
+    }
+
+    .success-overlay h2 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 5rem;
+      color: white;
+      text-shadow: 0 0 30px #ff2e63;
+      transform: scale(0.5);
+      transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .success-overlay.show h2 {
+      transform: scale(1);
+    }
+
+    .success-overlay p {
+      margin-top: 10px;
+      font-size: 1rem;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      opacity: 0.9;
+    }
+
+    .heart-rain {
+      position: absolute;
+      top: -10vh;
+      color: #ff2e63;
+      font-size: 20px;
+      animation: fall linear forwards;
+      z-index: 12;
+      pointer-events: none;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(360deg);
+      }
+    }
+
+    .gallery-section {
+      padding: 60px 20px 40px;
+      background: radial-gradient(circle at center, #b11313 0%, #101010 70%, #000000 100%);
+      min-height: 100vh;
+    }
+
+    .welcome-text {
+      color: white;
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 25px;
+      text-align: center;
+    }
+
+    .gallery {
+      display: flex;
+      width: 95vw;
+      max-width: 1200px;
+      height: 600px;
+      gap: 12px;
+      margin: 0 auto 40px;
+    }
+
+    .photo-card {
+      position: relative;
+      flex: 1;
+      height: 100%;
+      overflow: hidden;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: flex 0.8s cubic-bezier(0.25, 1, 0.3, 1);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      background: rgba(255,255,255,0.04);
+    }
+
+    .photo-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.1);
+      transition: transform 0.8s cubic-bezier(0.25, 1, 0.3, 1);
+      display: block;
+    }
+
+    .photo-card:hover {
+      flex: 5;
+    }
+
+    .photo-card:hover img {
+      transform: scale(1);
+    }
+
+    .gallery:hover .photo-card:not(:hover) {
+      flex: 0.4;
+      opacity: 0.6;
+    }
+
+    .name-section {
+      position: relative;
+      width: 100%;
+      min-height: 90vh;
+      background: #050505;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: flex-end;
+    }
+
+    #nameCanvas {
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .ui-layer {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      padding-bottom: 8vh;
+      pointer-events: none;
+    }
+
+    .name-pill {
+      pointer-events: none;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 12px 24px;
+      font-size: 1.2rem;
+      font-family: 'Rajdhani', sans-serif;
+      font-weight: 700;
+      color: #fff;
+      border-radius: 30px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      width: 90%;
+      max-width: 420px;
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    .bottom-actions {
+      display: flex;
+      justify-content: center;
+      margin-top: 24px;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    @keyframes floatTitle {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    @media (max-width: 768px) {
+      .login-box {
+        width: 90%;
+        padding: 24px 18px;
+      }
+
+      .girl-bike {
+        width: 220px;
+        bottom: 90px;
+      }
+
+      .hero-title {
+        font-size: 3rem;
+      }
+
+      .hero-subtitle {
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+      }
+
+      .gallery {
+        height: 420px;
+        width: 100%;
+      }
+
+      .welcome-text {
+        font-size: 24px;
+      }
+
+      .name-pill {
+        font-size: 1rem;
+        padding: 10px 20px;
+        width: 80%;
+      }
+
+      .success-overlay h2 {
+        font-size: 3rem;
+      }
+    }
   </style>
 </head>
 <body>
-  <div class="pattern"></div>
+  <div id="loginPage">
+    <div class="scene">
+      <img src="trees.png" alt="trees" class="trees-top" />
+      <img src="girl.png" alt="girl on bike" class="girl-bike" />
 
-  <div class="wrap">
-    <div class="card">
-      <div class="content">
-        <div class="pill"></div>
+      <img src="leaf_01.png" class="leaf leaf1" alt="leaf" />
+      <img src="leaf_02.png" class="leaf leaf2" alt="leaf" />
+      <img src="leaf_03.png" class="leaf leaf3" alt="leaf" />
+      <img src="leaf_04.png" class="leaf leaf4" alt="leaf" />
+      <img src="leaf_01.png" class="leaf leaf5" alt="leaf" />
+      <img src="leaf_03.png" class="leaf leaf6" alt="leaf" />
 
-        <!-- ✅ LOGIN SCREEN -->
-        <section id="loginScreen">
-          <h1>Нэрээ оруулаад нэвтэрнэ үү</h1>
-          <p class="sub">Нэр + нууц үг зөв бол мэндчилгээ гарна.</p>
-
-          <div class="box">
-            <div class="form">
-              <div>
-                <label for="loginName">Нэр</label>
-                <input id="loginName" type="text" placeholder="Өөрийн бүтэн нэрээ оруулна уу:" autocomplete="name">
-              </div>
-              <div>
-                <label for="loginPass">Нууц үг</label>
-                <input id="loginPass" type="password" placeholder="Нууц үг" autocomplete="current-password">
-              </div>
-
-              <div class="row">
-                <div class="btns">
-                  <button id="loginBtn" type="button">Нэвтрэх</button>
-                  <button id="clearBtn" class="secondary" type="button">Цэвэрлэх</button>
-                </div>
-                <span class="error" id="loginError"></span>
-              </div>
-
-              <p class="sub" style="margin:0">
-                Нууц үг бид 2 ийн танилцсан өдөр.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        <!-- ✅ GREETING SCREEN -->
-        <section id="greetScreen" class="hide">
-          <div class="pill" id="modePill">Цагаан сар — мэндчилгээ</div>
-          <h1 id="title">Сар шинэдээ сайхан шинэлээрэй 🤍✨</h1>
-          <!-- <p class="sub" id="sub">Таны</p> -->
-
-          <div class="box">
-            <div class="imgFrame">
-              <img id="heroImg" alt="Мэндчилгээний зураг">
-            </div>
-
-            <p class="msg" id="msg"></p>
-
-            <div class="row">
-              <div class="btns">
-                <!-- <button id="shareBtn" type="button">Share</button>
-                <button id="waBtn" class="secondary" type="button">WhatsApp</button>
-                <button id="copyBtn" class="secondary" type="button">Copy</button> -->
-                <button id="logoutBtn" class="secondary" type="button">Гарах</button>
-              </div>
-              <span class="sub" style="margin:0" id="who"></span>
-            </div>
-          </div>
-
-          <div class="tiny">
-            <span id="modeInfo"></span>
-            <span id="dateInfo"></span>
-          </div>
-        </section>
-
+      <div class="login-box">
+        <h2>Нэвтрэх</h2>
+        <input type="text" id="username" placeholder="Нэрээ оруулна уу" />
+        <button onclick="login()">Нэвтрэх</button>
       </div>
     </div>
   </div>
 
-  <div class="toast" id="toast">OK ✅</div>
+  <div id="galleryPage">
+    <section class="hero-wrap" id="topSection">
+      <canvas id="heartCanvas"></canvas>
+
+      <div class="hero-content" id="heroContent">
+        <h1 class="hero-title">Мартын 8-ны мэнд</h1>
+        <p class="hero-subtitle">эмэгтэйчүүдийн эрхийг хамгаалах өдөр</p>
+
+        <div class="hero-actions">
+          <button class="action-btn primary" onclick="explodeHeart()">Дар</button>
+          <button class="logout-btn" onclick="logout()">Гарах</button>
+        </div>
+      </div>
+
+      <div class="success-overlay" id="successOverlay">
+        <h2>Мартын 8-ны мэнд ❤️</h2>
+        <p>Хамгийн гоё өдөр</p>
+      </div>
+    </section>
+
+    <section class="gallery-section" id="gallerySection">
+      <div class="welcome-text" id="welcomeText"></div>
+      <div class="gallery" id="userGallery"></div>
+
+      <div class="bottom-actions">
+        <a href="#nameSection" class="top-btn">Нэр рүү очих</a>
+        <a href="#topSection" class="top-btn">Дээш гарах</a>
+        <button class="logout-btn" onclick="logout()">Гарах</button>
+      </div>
+    </section>
+
+    <section class="name-section" id="nameSection">
+      <canvas id="nameCanvas"></canvas>
+      <div class="ui-layer">
+        <div class="name-pill" id="nameTag"></div>
+      </div>
+    </section>
+  </div>
 
   <script>
-    /*********************************************************
-     * 1) ТОХИРУУЛГА
-     *********************************************************/
-    // Шинийн 1 - Gregorian огноо
-    const TSAGAAN_SAR_SHINII_1 = "2026-02-18"; // YYYY-MM-DD
-
-    // ✅ НУУЦ ҮГ (ЭНД СОЛИНО)
-    const PASSWORD = "1001"; // <-- өөрийн нууц үг
-
-    /*********************************************************
-     * 2) НЭРЭЭС ХАМААРАХ ЗУРГИЙН МАП
-     * - Түлхүүр: нэр (жишээ нь "Ээж", "Аав")
-     * - Утга: зурагны зам (img/...)
-     *
-     * Та өөрийнхөө “танайхны” нэрээр зургаа нэмээд явна.
-     *********************************************************/
-    const IMAGE_BY_NAME = {
-      "Оюунбилэг": "Оюунбилэг.jpg",
-      "Энхжаргал": "Энхжаргал.jpg",
-      "Сувд-Эрдэнэ": "Сувд-Эрдэнэ.jpg",
-      "Эгч": "Hamt_Olon.jpg",
-      "Найз": "Hamt_Olon.jpg"
+    const userImages = {
+      "Оюунбилэг": ["Ombi1.jpg", "Ombi2.jpg", "Ombi3.jpg", "Ombi4.jpg", "Ombi5.jpg"],
+      "Үүрийнцолмон": ["vvriin1.jpg", "vvriin2.jpg", "vvriin3.jpg", "vvriin4.jpg", "vvriin5.jpg", "vvriin6.jpg"],
+      "Нүрмаа": ["nvrmaa1.jpg", "nvrmaa2.jpg", "nvrmaa3.jpg", "nvrmaa4.jpg", "nvrmaa5.jpg"],
+      "Ууганболор": ["Uugaa1.jpg", "Uugaa2.jpg", "Uugaa3.jpg", "Uugaa4.jpg", "Uugaa5.jpg"],
+      "Нарантуул": ["Tuul1.jpg", "Tuul2.jpg", "Tuul3.jpg", "Tuul4.jpg"]
     };
 
-    // Хэрвээ нэр нь таарахгүй бол энэ зураг гарна
-    const DEFAULT_IMAGE = "img/default.jpg";
-
-    /*********************************************************
-     * Helpers
-     *********************************************************/
-    const $ = (id)=>document.getElementById(id);
-    const toast = $("toast");
-
-    function showToast(t){
-      toast.textContent = t;
-      toast.classList.add("show");
-      clearTimeout(showToast._t);
-      showToast._t = setTimeout(()=>toast.classList.remove("show"), 1500);
-    }
-    function pad(n){ return String(n).padStart(2,"0"); }
-    function parseYMD(ymd){
-      const [y,m,d] = ymd.split("-").map(Number);
-      return new Date(y, m-1, d, 12, 0, 0);
-    }
-    function formatDate(d){
-      return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`;
-    }
-    function addDays(date, days){
-      const d = new Date(date);
-      d.setDate(d.getDate() + days);
-      return d;
-    }
-    function normName(s){
-      return (s || "").trim();
+    function normalizeName(text) {
+      return text.trim().toLowerCase();
     }
 
-    /*********************************************************
-     * Mode (Шинийн 1 / Ердийн)
-     *********************************************************/
-    const shinii1 = parseYMD(TSAGAAN_SAR_SHINII_1);
-    const bituun = addDays(shinii1, -1);
-    const now = new Date();
-    const today = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12, 0, 0);
-
-    const isBituun = formatDate(today) === formatDate(bituun);
-    const isShinii1 = formatDate(today) === formatDate(shinii1);
-
-    const bituunMsg =
-`Битүүний орой “Бүтэн мэнд” хүргэе! 🌙✨
-Хуучин оноо үдэж, шинэ оноо угтах гэж буй энэ сайхан өдөр
-эрүүл энх, элбэг дэлбэг, амар амгалан бүхнийг хүсье.
-Сар шинэдээ сайхан шинэлээрэй! 🤍`;
-
-    const shiniiMsg =
-`Сар шинэдээ сайхан шинэлээрэй! 🤍✨
-Шинэ ондоо эрүүл энх, амжилт бүтээл, аз жаргал дүүрэн байхыг хүсье.
-`;
-
-    function buildMessage(name){
-      const base = isBituun ? bituunMsg : shiniiMsg;
-      if(!name) return base;
-      return `${name} ,\n${base}`;
+    function findMatchedUser(inputName) {
+      const normalizedInput = normalizeName(inputName);
+      return Object.keys(userImages).find(name => normalizeName(name) === normalizedInput);
     }
 
-    function modeTitle(){
-      if(isBituun) return { pill:"Битүүний өдөр — “Бүтэн мэнд”", title:"Бүтэн мэнд хүргэе 🌙✨", mode:"Битүүн" };
-      if(isShinii1) return { pill:"Шинийн 1 — мэндчилгээ", title:"Сар шинэдээ сайхан шинэлээрэй 🤍✨", mode:"Шинийн 1" };
-      return { pill:"Цагаан сар — мэндчилгээ", title:"Сар шинэдээ сайхан шинэлээрэй 🤍✨", mode:"Ердийн" };
-    }
+    function login() {
+      const input = document.getElementById("username");
+      const username = input.value.trim();
 
-    /*********************************************************
-     * ✅ Login logic (simple)
-     *********************************************************/
-    const loginScreen = $("loginScreen");
-    const greetScreen = $("greetScreen");
-    const loginName = $("loginName");
-    const loginPass = $("loginPass");
-    const loginBtn = $("loginBtn");
-    const clearBtn = $("clearBtn");
-    const loginError = $("loginError");
-
-    const heroImg = $("heroImg");
-    const msgEl = $("msg");
-    const titleEl = $("title");
-    const modePill = $("modePill");
-    const modeInfo = $("modeInfo");
-    const dateInfo = $("dateInfo");
-    const who = $("who");
-
-    // remember only the name (not password)
-    const NAME_KEY = "tsagaan_sar_login_name_v1";
-    const savedName = localStorage.getItem(NAME_KEY);
-    if(savedName) loginName.value = savedName;
-
-    function pickImageByName(name){
-      // яг таг таарах нэр бол тэр зураг
-      if(IMAGE_BY_NAME[name]) return IMAGE_BY_NAME[name];
-
-      // жижиг/том үсгээс болж алдвал гэж: closest match (case-insensitive)
-      const lower = name.toLowerCase();
-      for(const k of Object.keys(IMAGE_BY_NAME)){
-        if(k.toLowerCase() === lower) return IMAGE_BY_NAME[k];
-      }
-      return DEFAULT_IMAGE;
-    }
-
-    function enterGreeting(name){
-      const mt = modeTitle();
-      modePill.textContent = mt.pill;
-      titleEl.textContent = mt.title;
-      modeInfo.textContent = `Горим: ${mt.mode}`;
-      dateInfo.textContent = `Өнөөдөр: ${formatDate(today)}`;
-
-      who.textContent = `Нэр: ${name}`;
-      msgEl.textContent = buildMessage(name);
-
-      const imgSrc = pickImageByName(name);
-      heroImg.onerror = () => { heroImg.src = DEFAULT_IMAGE; };
-      heroImg.src = imgSrc;
-
-      loginScreen.classList.add("hide");
-      greetScreen.classList.remove("hide");
-      showToast("Нэвтэрлээ ✅");
-    }
-
-    function doLogin(){
-      loginError.textContent = "";
-      const name = normName(loginName.value);
-      const pass = loginPass.value;
-
-      if(!name){
-        loginError.textContent = "Нэрээ оруулна уу.";
-        return;
-      }
-      if(pass !== PASSWORD){
-        loginError.textContent = "Нууц үг буруу байна.";
+      if (!username) {
+        alert("Нэрээ оруулна уу.");
         return;
       }
 
-      localStorage.setItem(NAME_KEY, name);
-      enterGreeting(name);
-    }
+      const matchedUser = findMatchedUser(username);
 
-    loginBtn.addEventListener("click", doLogin);
-    loginPass.addEventListener("keydown", (e)=>{ if(e.key === "Enter") doLogin(); });
-    clearBtn.addEventListener("click", ()=>{
-      loginName.value = "";
-      loginPass.value = "";
-      loginError.textContent = "";
-      localStorage.removeItem(NAME_KEY);
-      showToast("Цэвэрлэв");
-    });
-
-    $("logoutBtn").addEventListener("click", ()=>{
-      // go back to login
-      greetScreen.classList.add("hide");
-      loginScreen.classList.remove("hide");
-      loginPass.value = "";
-      showToast("Гарлаа");
-    });
-
-    /*********************************************************
-     * Share / WhatsApp / Copy
-     *********************************************************/
-    async function copyText(text){
-      try{
-        await navigator.clipboard.writeText(text);
-        showToast("Хууллаа ✅");
-      }catch{
-        const ta = document.createElement("textarea");
-        ta.value = text;
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand("copy");
-        ta.remove();
-        showToast("Хууллаа ✅");
+      if (!matchedUser) {
+        alert("Уучлаарай, энэ нэрээр нэвтрэх боломжгүй.");
+        return;
       }
+
+      document.getElementById("loginPage").style.display = "none";
+      document.getElementById("galleryPage").style.display = "block";
+
+      document.getElementById("welcomeText").textContent = matchedUser + " - Мартын 8-ны мэнд";
+      document.getElementById("nameTag").textContent = matchedUser;
+
+      const gallery = document.getElementById("userGallery");
+      gallery.innerHTML = "";
+
+      userImages[matchedUser].forEach((imgSrc, index) => {
+        const card = document.createElement("div");
+        card.className = "photo-card";
+
+        const img = document.createElement("img");
+        img.src = imgSrc;
+        img.alt = matchedUser + " зураг " + (index + 1);
+
+        card.appendChild(img);
+        gallery.appendChild(card);
+      });
+
+      resetHeartSection();
+
+      resizeHeartCanvas();
+      initHeartParticles();
+
+      resizeNameCanvas();
+      initNameParticles(matchedUser);
+
+      window.scrollTo(0, 0);
     }
-    $("copyBtn").addEventListener("click", ()=>{
-      const name = localStorage.getItem(NAME_KEY) || "";
-      copyText(buildMessage(name));
+
+    function logout() {
+      document.getElementById("galleryPage").style.display = "none";
+      document.getElementById("loginPage").style.display = "block";
+      document.getElementById("username").value = "";
+      resetHeartSection();
+      window.scrollTo(0, 0);
+    }
+
+    function resetHeartSection() {
+      isExploded = false;
+      document.getElementById("heroContent").classList.remove("hidden");
+      document.getElementById("successOverlay").classList.remove("show");
+      heartRainActive = false;
+    }
+
+    document.getElementById("username").addEventListener("keypress", function(e) {
+      if (e.key === "Enter") login();
     });
-    $("waBtn").addEventListener("click", ()=>{
-      const name = localStorage.getItem(NAME_KEY) || "";
-      const text = encodeURIComponent(buildMessage(name));
-      window.open(`https://wa.me/?text=${text}`, "_blank", "noopener,noreferrer");
+
+    /* ================= HEART CANVAS ================= */
+    const heartCanvas = document.getElementById("heartCanvas");
+    const heartCtx = heartCanvas.getContext("2d");
+
+    let heartParticles = [];
+    let heartWidth = 0;
+    let heartHeight = 0;
+    let heartTime = 0;
+    let rotX = 0;
+    let rotY = 0;
+    let targetRotY = 0;
+    let heartMouse = { x: 0, y: 0 };
+    let heartStarted = false;
+    let isExploded = false;
+    let heartRainActive = false;
+
+    const HEART_PARTICLE_COUNT = 2200;
+    const HEART_SIZE = 16;
+
+    function resizeHeartCanvas() {
+      const wrap = document.querySelector(".hero-wrap");
+      heartWidth = heartCanvas.width = wrap.clientWidth;
+      heartHeight = heartCanvas.height = wrap.clientHeight;
+    }
+
+    document.addEventListener("mousemove", e => {
+      heartMouse.x = (e.clientX - heartWidth / 2) * 0.001;
+      heartMouse.y = (e.clientY - heartHeight / 2) * 0.001;
+      nameMouse.x = e.clientX;
+      nameMouse.y = e.clientY;
     });
-    $("shareBtn").addEventListener("click", async ()=>{
-      const name = localStorage.getItem(NAME_KEY) || "";
-      const text = buildMessage(name);
-      try{
-        if(navigator.share){
-          await navigator.share({ title: titleEl.textContent, text });
-          showToast("Share ✅");
-        } else {
-          await copyText(text);
+
+    document.addEventListener("touchmove", e => {
+      if (e.touches && e.touches[0]) {
+        nameMouse.x = e.touches[0].clientX;
+        nameMouse.y = e.touches[0].clientY;
+      }
+    }, { passive: true });
+
+    class HeartParticle {
+      constructor() {
+        this.setHeartPos();
+        this.x = this.tx;
+        this.y = this.ty;
+        this.z = this.tz;
+        this.vx = 0;
+        this.vy = 0;
+        this.vz = 0;
+        this.size = Math.random() * 2 + 0.3;
+        this.friction = 0.94;
+        this.color = `hsl(${340 + Math.random() * 35}, 100%, ${50 + Math.random() * 28}%)`;
+      }
+
+      setHeartPos() {
+        const t = Math.random() * Math.PI * 2;
+        const u = Math.random();
+        const scale = Math.pow(u, 1 / 3) * HEART_SIZE;
+
+        const x = 16 * Math.pow(Math.sin(t), 3);
+        const y = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
+        const z = (Math.random() - 0.5) * 10;
+
+        this.tx = x * scale;
+        this.ty = y * scale;
+        this.tz = z * scale;
+      }
+
+      explode() {
+        this.vx = (Math.random() - 0.5) * 18;
+        this.vy = (Math.random() - 0.5) * 18;
+        this.vz = (Math.random() - 0.5) * 18;
+      }
+
+      update(beat) {
+        if (isExploded) {
+          this.x += this.vx;
+          this.y += this.vy;
+          this.z += this.vz;
+          this.vx *= this.friction;
+          this.vy *= this.friction;
+          this.vz *= this.friction;
+          this.size *= 0.996;
+          return;
         }
-      } catch {
-        showToast("Цуцлагдсан");
+
+        const pulse = 1 + beat * 0.1;
+
+        const targetX = this.tx * pulse;
+        const targetY = this.ty * pulse;
+        const targetZ = this.tz * pulse;
+
+        this.x += (targetX - this.x) * 0.1;
+        this.y += (targetY - this.y) * 0.1;
+        this.z += (targetZ - this.z) * 0.1;
+
+        this.x += (Math.random() - 0.5) * 0.4;
+        this.y += (Math.random() - 0.5) * 0.4;
+        this.z += (Math.random() - 0.5) * 0.4;
+      }
+
+      draw(ctx, rx, ry) {
+        const y1 = this.y * Math.cos(rx) - this.z * Math.sin(rx);
+        const z1 = this.z * Math.cos(rx) + this.y * Math.sin(rx);
+
+        const x1 = this.x * Math.cos(ry) - z1 * Math.sin(ry);
+        const z2 = z1 * Math.cos(ry) + this.x * Math.sin(ry);
+
+        const perspective = 500;
+        const scale = perspective / (perspective + z2);
+
+        if (scale < 0 || z2 < -perspective || this.size <= 0.05) return;
+
+        const x2d = heartWidth / 2 + x1 * scale;
+        const y2d = heartHeight / 2 + y1 * scale;
+
+        ctx.fillStyle = this.color;
+        ctx.beginPath();
+        ctx.arc(x2d, y2d, this.size * scale, 0, Math.PI * 2);
+        ctx.fill();
+      }
+    }
+
+    function initHeartParticles() {
+      heartParticles = [];
+      for (let i = 0; i < HEART_PARTICLE_COUNT; i++) {
+        heartParticles.push(new HeartParticle());
+      }
+
+      if (!heartStarted) {
+        heartStarted = true;
+        animateHeart();
+      }
+    }
+
+    function explodeHeart() {
+      if (isExploded) return;
+
+      isExploded = true;
+      document.getElementById("heroContent").classList.add("hidden");
+      document.getElementById("successOverlay").classList.add("show");
+
+      heartParticles.forEach(p => p.explode());
+      startHeartRain();
+    }
+
+    function startHeartRain() {
+      if (heartRainActive) return;
+      heartRainActive = true;
+
+      const wrap = document.querySelector(".hero-wrap");
+      const heartChars = ["❤️", "💖", "💕", "💗"];
+
+      const rainInterval = setInterval(() => {
+        if (!heartRainActive || document.getElementById("galleryPage").style.display !== "block") {
+          clearInterval(rainInterval);
+          return;
+        }
+
+        const heart = document.createElement("div");
+        heart.className = "heart-rain";
+        heart.innerText = heartChars[Math.floor(Math.random() * heartChars.length)];
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.fontSize = (Math.random() * 20 + 10) + "px";
+        heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
+
+        wrap.appendChild(heart);
+
+        setTimeout(() => {
+          heart.remove();
+        }, 5000);
+      }, 120);
+    }
+
+    function animateHeart() {
+      requestAnimationFrame(animateHeart);
+
+      if (document.getElementById("galleryPage").style.display !== "block") return;
+
+      heartCtx.fillStyle = "rgba(15, 2, 5, 0.35)";
+      heartCtx.fillRect(0, 0, heartWidth, heartHeight);
+
+      heartTime += 0.02;
+      const beat = Math.pow(Math.sin(heartTime * 3), 60) * 0.5 + Math.sin(heartTime * 3 + 0.5) * 0.1;
+
+      targetRotY += 0.003;
+      rotY += (targetRotY + heartMouse.x - rotY) * 0.05;
+      rotX += (heartMouse.y - rotX) * 0.05;
+
+      heartCtx.globalCompositeOperation = "lighter";
+      heartParticles.forEach(p => {
+        p.update(beat);
+        p.draw(heartCtx, rotX, rotY);
+      });
+      heartCtx.globalCompositeOperation = "source-over";
+    }
+
+    /* ================= NAME CANVAS ================= */
+    const nameCanvas = document.getElementById('nameCanvas');
+    const nameCtx = nameCanvas.getContext('2d', { willReadFrequently: true });
+
+    let nameParticles = [];
+    let nameMouse = { x: null, y: null, radius: 100 };
+    let flowTimer = 0;
+    let hueRotate = 0;
+    let nameStarted = false;
+
+    function resizeNameCanvas() {
+      const sec = document.getElementById("nameSection");
+      nameCanvas.width = sec.clientWidth;
+      nameCanvas.height = sec.clientHeight;
+      nameMouse.radius = nameCanvas.width < 600 ? 80 : 150;
+    }
+
+    window.addEventListener('resize', () => {
+      resizeHeartCanvas();
+      resizeNameCanvas();
+      const currentName = document.getElementById("nameTag").textContent.trim();
+      if (currentName) {
+        initNameParticles(currentName);
       }
     });
 
-    // Optional: auto-enter if user already typed name before (but still require password)
-    // No auto login for safety.
+    window.addEventListener('touchend', () => {
+      nameMouse.x = null;
+      nameMouse.y = null;
+    });
+
+    class NameParticle {
+      constructor(x, y, color, isOrb) {
+        this.x = Math.random() * nameCanvas.width;
+        this.y = Math.random() * nameCanvas.height;
+        this.baseX = x;
+        this.baseY = y;
+        this.size = (Math.random() * 2) + 1;
+        this.color = color;
+        this.vx = 0;
+        this.vy = 0;
+        this.isOrb = isOrb;
+        this.offset = Math.random() * 100;
+        this.speed = 0.03 + Math.random() * 0.04;
+        this.friction = 0.92;
+      }
+
+      draw() {
+        let currentHue = (parseInt(this.color) + hueRotate) % 360;
+        nameCtx.beginPath();
+        nameCtx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        nameCtx.fillStyle = `hsl(${currentHue}, 100%, 60%)`;
+        nameCtx.fill();
+      }
+
+      update() {
+        let targetX = this.baseX;
+        let targetY = this.baseY;
+
+        if (this.isOrb) {
+          targetX += Math.cos(flowTimer + this.offset) * 30;
+          targetY += Math.sin(flowTimer * 0.5 + this.offset) * 30;
+        } else {
+          targetX += Math.cos(flowTimer * 2 + this.offset) * 2;
+          targetY += Math.sin(flowTimer * 2 + this.offset) * 2;
+        }
+
+        let dx = targetX - this.x;
+        let dy = targetY - this.y;
+
+        this.vx += dx * this.speed;
+        this.vy += dy * this.speed;
+
+        if (nameMouse.x != null) {
+          let mdx = nameMouse.x - this.x;
+          let mdy = nameMouse.y - this.y;
+          let dist = Math.sqrt(mdx * mdx + mdy * mdy);
+
+          if (dist < nameMouse.radius) {
+            let force = (nameMouse.radius - dist) / nameMouse.radius;
+            let angle = Math.atan2(mdy, mdx);
+            let push = force * 15;
+            this.vx -= Math.cos(angle) * push;
+            this.vy -= Math.sin(angle) * push;
+          }
+        }
+
+        this.vx *= this.friction;
+        this.vy *= this.friction;
+        this.x += this.vx;
+        this.y += this.vy;
+      }
+    }
+
+    function initNameParticles(text) {
+      nameParticles = [];
+      const cx = nameCanvas.width / 2;
+      const cy = nameCanvas.height / 2;
+
+      const isMobile = nameCanvas.width < 600;
+      const scanSkip = isMobile ? 5 : 4;
+
+      nameCtx.clearRect(0, 0, nameCanvas.width, nameCanvas.height);
+
+      const upperText = text.toUpperCase();
+      let fontSize = Math.min(nameCanvas.width * 0.16, 170);
+
+      nameCtx.fillStyle = 'white';
+      nameCtx.font = `900 ${fontSize}px "Rajdhani"`;
+      nameCtx.textAlign = 'center';
+      nameCtx.textBaseline = 'middle';
+      nameCtx.fillText(upperText, cx, cy - 40);
+
+      const data = nameCtx.getImageData(0, 0, nameCanvas.width, nameCanvas.height).data;
+      nameCtx.clearRect(0, 0, nameCanvas.width, nameCanvas.height);
+
+      for (let y = 0; y < nameCanvas.height; y += scanSkip) {
+        for (let x = 0; x < nameCanvas.width; x += scanSkip) {
+          if (data[(y * nameCanvas.width + x) * 4 + 3] > 128) {
+            let hue = Math.floor(180 + (x / nameCanvas.width) * 100);
+            nameParticles.push(new NameParticle(x, y, hue, false));
+          }
+        }
+      }
+
+      if (!nameStarted) {
+        nameStarted = true;
+        animateName();
+      }
+    }
+
+    function animateName() {
+      requestAnimationFrame(animateName);
+
+      if (document.getElementById("galleryPage").style.display !== "block") return;
+
+      nameCtx.fillStyle = 'rgba(5, 5, 5, 0.2)';
+      nameCtx.fillRect(0, 0, nameCanvas.width, nameCanvas.height);
+
+      hueRotate += 0.5;
+      flowTimer += 0.04;
+
+      nameCtx.globalCompositeOperation = 'lighter';
+      nameParticles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+      nameCtx.globalCompositeOperation = 'source-over';
+    }
+
+    window.onload = function() {
+      document.getElementById("loginPage").style.display = "block";
+      document.getElementById("galleryPage").style.display = "none";
+    };
   </script>
 </body>
 </html>
-
-
-
-
-
-
-
